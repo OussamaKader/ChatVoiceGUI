@@ -1,69 +1,63 @@
-## Getting Started
-<!--
-Ce projet est une application Java développée avec Visual Studio Code.
+# ChatVoiceGUI - Explication du projet
+
+## Description du projet
+Ce projet est une application Java de chat vocal et textuel.
 Il utilise :
-- Java (programmation orientée objet)
-- Swing pour l’interface graphique
-- Les sockets pour la communication client–serveur
+- **Java** (programmation orientée objet)
+- **Swing** pour l’interface graphique
+- **Sockets** pour la communication client-serveur
 
-L’objectif du projet est de permettre la communication entre un serveur
-et plusieurs clients via une interface graphique.
--->
-
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+L’objectif est de permettre à plusieurs clients de communiquer
+entre eux via une interface graphique conviviale.
 
 ---
 
-## Folder Structure
-<!--
-Cette section explique l’organisation des dossiers du projet.
-Une bonne structure facilite la lecture, la maintenance
-et l’évolution du programme.
--->
+## Structure du projet
 
-The workspace contains two folders by default, where:
+### Dossiers principaux
 
-- `src`: the folder to maintain sources
-<!--
-Le dossier src contient tout le code source Java.
-On y trouve :
-- les classes côté client (interface graphique, communication)
-- les classes côté serveur (gestion des connexions)
--->
-
-- `lib`: the folder to maintain dependencies
-<!--
-Le dossier lib est utilisé pour stocker les bibliothèques externes
-si le projet en nécessite.
--->
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-<!--
-Le dossier bin contient les fichiers compilés (.class).
-Ces fichiers sont générés automatiquement après la compilation
-et ne doivent généralement pas être modifiés manuellement.
--->
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-<!--
-Les fichiers dans le dossier .vscode permettent de configurer
-l’exécution et la compilation du projet Java dans Visual Studio Code.
--->
+- `src/`
+    - `client/` : classes côté client (ChatClient, ChatVoiceGUI, VoiceUtils)
+    - `server/` : classes côté serveur (ChatServer, ClientHandler)
+- `bin/` : fichiers compilés (.class)
+- `.vscode/` : configuration de VS Code
+- `lib/` : bibliothèques externes (si utilisées)
 
 ---
 
-## Dependency Management
-<!--
-Cette section concerne la gestion des dépendances du projet Java.
-Visual Studio Code fournit une vue spéciale pour gérer les bibliothèques.
--->
+## Explication du code
 
-The `JAVA PROJECTS` view allows you to manage your dependencies.
-<!--
-Cette vue permet :
-- d’ajouter ou supprimer des dépendances
-- de gérer le classpath
-- de compiler et exécuter le projet facilement
--->
+### Serveur (`ChatServer.java`)
+- Écoute les connexions des clients via un port réseau
+- Crée un **ClientHandler** pour chaque client connecté
+- Reçoit et envoie les messages aux clients
 
-More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### Client (`ChatClient.java`)
+- Se connecte au serveur via une socket
+- Envoie les messages saisis par l’utilisateur
+- Reçoit les messages d’autres clients
+
+### Interface graphique (`ChatVoiceGUI.java`)
+- Affiche une fenêtre Swing pour le chat
+- Contient :
+    - zone de texte pour afficher les messages
+    - champ de saisie pour envoyer un message
+    - boutons pour actions supplémentaires
+
+### Gestion de l’audio (`VoiceUtils.java`)
+- Contient les fonctions pour gérer l’envoi et la réception de messages vocaux
+- Encode et décode le son pour transmission via le réseau
+
+---
+
+## Compilation et exécution
+1. Compiler les fichiers Java (`src/`) → fichiers `.class` générés dans `bin/`
+2. Lancer le serveur : `java server.ChatServer`
+3. Lancer un ou plusieurs clients : `java client.ChatClient`
+
+---
+
+## Notes
+- Ce projet illustre la **POO**, la **programmation réseau** et l’**interface graphique Swing**
+- Les fichiers `.class` **ne doivent pas être modifiés**
+- Ce README sert uniquement à expliquer le fonctionnement du code
